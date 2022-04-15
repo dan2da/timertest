@@ -18,7 +18,9 @@ import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener{
     private static final String TAG = "MainActivity";
+
     private boolean mTimerRunning;
+
     //타이머 시작 종류 버튼
     private Button startBTN;
     private Button stopBTN;
@@ -53,27 +55,25 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         powerswitch.setOnCheckedChangeListener(this);
         powerupswitch.setOnCheckedChangeListener(this);
 
-        startBTN.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
-                    startTimer();
-
-                }
-        });
-
-        stopBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                resetTimer();
-            }
-        });
     }
 
-        private void startTimer(String) {
 
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean ischecked) {
+        switch (compoundButton.getId()){
+            case(R.id.powerswitch):
+                if(ischecked) {
+                    timelayout.setVisibility(View.VISIBLE);
+                    powerupswitch.setEnabled(false);
+                }
+                else {
+                    timelayout.setVisibility(View.INVISIBLE);
+                    powerupswitch.setEnabled(true);
+                }
         }
-        private void resetTimer() {}
+    }
+
 
 
 
@@ -159,20 +159,6 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean ischecked) {
-        switch (compoundButton.getId()){
-            case(R.id.powerswitch):
-                if(ischecked) {
-                    timelayout.setVisibility(View.VISIBLE);
-                    powerupswitch.setEnabled(false);
-                }
-                else {
-                    timelayout.setVisibility(View.INVISIBLE);
-                    powerupswitch.setEnabled(true);
-                }
-        }
-    }
 
 
 
